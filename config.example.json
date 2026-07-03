@@ -1,0 +1,47 @@
+{
+  "mac_address": "AA:BB:CC:DD:EE:FF",
+  "xmpp": {
+    "jid": "thermo-bot@example.com",
+    "password": "secret",
+    "omemo_store": "omemo_store.json"
+  },
+  "sensor": {
+    "temperature_notify_uuid": "a8e8e254-ce9d-42e7-9170-aa67f1694a77",
+    "valve_control_notify_uuid": "acafc3f3-8fbc-4e44-8226-a7bead984921",
+    "valve_state_notify_uuid": "7652f1da-420a-41f2-a428-59feda4b32f6",
+    "reconnect_interval_sec": 600,
+    "reconnect_scan_timeout_sec": 15,
+    "messages": {
+      "connected": "Датчик подключён, мониторинг температуры запущен.",
+      "disconnected": "Датчик отключён, мониторинг температуры остановлен.",
+      "valve_control_enabled": "Включено управление клапаном, контроль температуры приостановлен.",
+      "valve_control_disabled": "Управление клапаном выключено, возобновлён контроль температуры.",
+      "valve_opened": "Клапан открыт.",
+      "valve_closed": "Клапан закрыт."
+    }
+  },
+  "thresholds": {
+    "hysteresis": 0.5,
+    "high": [
+      {
+        "value": 28.0,
+        "message": "Температура поднялась выше 28 °C — стало тепло."
+      },
+      {
+        "value": 32.0,
+        "message": "Температура поднялась выше 32 °C — жарко!"
+      }
+    ],
+    "low": [
+      {
+        "value": 18.0,
+        "message": "Температура опустилась ниже 18 °C — прохладно."
+      },
+      {
+        "value": 12.0,
+        "message": "Температура опустилась ниже 12 °C — холодно!"
+      }
+    ]
+  },
+  "subscribers": []
+}
