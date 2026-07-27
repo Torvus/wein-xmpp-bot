@@ -1,0 +1,13 @@
+.venv
+.vscode
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+*.pyzwz
+omemo_store.json
+config.json
