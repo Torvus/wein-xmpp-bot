@@ -171,8 +171,8 @@ class WeinDevice:
             while not self._unloaded and client.is_connected:
                 try:
                     data = await client.read_gatt_char(char)
-                    self._apply_valve(data)
-                    self.async_update_listeners()
+                    if self._apply_valve(data):
+                        self.async_update_listeners()
                 except asyncio.CancelledError:
                     raise
                 except Exception:
@@ -195,20 +195,25 @@ class WeinDevice:
 
     @callback
     def _set_temperature(self, value: float) -> None:
+        if self.temperature is not None and abs(self.temperature - value) < 0.005:
+            return
         self.temperature = value
         self.async_update_listeners()
 
     @callback
     def _set_valve_from_bytes(self, data: bytes) -> None:
-        self._apply_valve(data)
-        self.async_update_listeners()
+        if self._apply_valve(data):
+            self.async_update_listeners()
 
-    def _apply_valve(self, data: bytes | bytearray) -> None:
+    def _apply_valve(self, data: bytes | bytearray) -> bool:
         value = parse_boolean(data)
         if value is None:
             _LOGGER.debug("%s: bad valve payload %r", self.address, bytes(data))
-            return
+            return False
+        if value == self.valve_open:
+            return False
         self.valve_open = value
+        return True
 
     def _cancel_valve_poll(self) -> None:
         if self._valve_poll_task is not None and not self._valve_poll_task.done():
