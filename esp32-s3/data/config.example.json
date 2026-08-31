@@ -1,0 +1,38 @@
+{
+  "wifi": {
+    "ssid": "YOUR_WIFI_SSID",
+    "password": "YOUR_WIFI_PASSWORD"
+  },
+  "mqtt": {
+    "host": "192.168.1.10",
+    "port": 1883,
+    "username": "",
+    "password": "",
+    "discovery": true,
+    "discovery_prefix": "homeassistant",
+    "protocol": "3.1.1"
+  },
+  "sensor": {
+    "mac_address": "B0:CB:D8:EE:41:F6",
+    "ble_passkey": 0,
+    "reconnect_interval_sec": 600,
+    "reconnect_scan_timeout_sec": 15,
+    "characteristics": [
+      {
+        "uuid": "a8e8e254-ce9d-42e7-9170-aa67f1694a77",
+        "topic": "wein/b0cbd8ee41f6/temperature",
+        "type": "temperature"
+      },
+      {
+        "uuid": "acafc3f3-8fbc-4e44-8226-a7bead984921",
+        "topic": "wein/b0cbd8ee41f6/valve_control",
+        "type": "boolean"
+      },
+      {
+        "uuid": "7652f1da-420a-41f2-a428-59feda4b32f6",
+        "topic": "wein/b0cbd8ee41f6/valve_state",
+        "type": "boolean"
+      }
+    ]
+  }
+}
